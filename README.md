@@ -3,3 +3,17 @@ Utilities and libraries for converting source texts in a variety of formats
 
 [format]: https://github.com/okfn/textus/blob/master/docs/json_import_format.md
 
+## Installation and Usage
+
+Requires nodejs.
+
+Grab the source:
+
+    git clone https://github.com/OpenHumanities/textus-formatter`
+
+Then use it:
+
+    node cli.js
+
+Will print out usage instructions.
+
