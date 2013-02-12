@@ -24,10 +24,7 @@ exports.parse = function(wikiText) {
 	});
 
 	return {
-		text : [ {
-			text : textParts.join(""),
-			sequence : 0
-		} ],
+		text : textParts.join(""),
 		typography : typography,
 		semantics : []
 	};
