@@ -4,7 +4,11 @@
 // description of it
 
 var fs = require('fs');
-var wikitext = require('./src/wikitext-parser.js');
+var path = require('path');
+var parsers = {
+  wikitext: require('./src/wikitext-parser.js'),
+  text: require('./src/text-parser.js')
+};
 
 if (process.argv.length < 3) {
   var usage = 'Usage: node cli.js {path-of-file-to-process} [{output-path}]';
@@ -25,18 +29,27 @@ fs.readFile(filename, 'utf8', function(error, data) {
 		throw error;
 	}
 
-  var path = './';
+  var outpath = './';
   if (process.argv.length >= 4) {
-    path = process.argv[3];
+    outpath = process.argv[3];
   }
 
-  var parser = wikitext;
+  var ext = path.extname(filename);
+  var parsertype = null;
+  if (ext == '.wikitext' || ext == '.wikitxt') {
+    parsertype = 'wikitext';
+  } else {
+    parsertype = 'text';
+  }
+  console.log("Interpreting input as file of type: " + parsertype);
+  var parser = parsers[parsertype];
+
   var out = parser.parse(data);
-	fs.writeFile(path + "text.txt", out.text);
-	fs.writeFile(path + "typography.json", JSON.stringify(out.typography, null, 2));
-	fs.writeFile(path + "metadata.json", JSON.stringify(out.metadata, null, 2));
+	fs.writeFile(outpath + "text.txt", out.text);
+	fs.writeFile(outpath + "typography.json", JSON.stringify(out.typography, null, 2));
+	fs.writeFile(outpath + "metadata.json", JSON.stringify(out.metadata, null, 2));
   // todo semantics ...
 
-  console.log("Written to: " + path + "text.txt etc");
+  console.log("\nWritten results to: " + outpath + "text.txt, " + outpath + "typography.json etc");
 });
 
