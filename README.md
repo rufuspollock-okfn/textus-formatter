@@ -17,3 +17,7 @@ Then use it:
 
 Will print out usage instructions.
 
+A simple example:
+
+    node cli.js test/wikitext.wikitxt out/
+
