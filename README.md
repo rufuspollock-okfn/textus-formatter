@@ -9,7 +9,7 @@ Requires nodejs.
 
 Grab the source:
 
-    git clone https://github.com/OpenHumanities/textus-formatter`
+    git clone https://github.com/OpenHumanities/textus-formatter
 
 Then use it:
 
